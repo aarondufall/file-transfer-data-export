@@ -1,18 +1,16 @@
-module FileTransferComponent
+module FileTransferDataExport
   module Handlers
-    class Commands
+    class Events
       include Messaging::Handle
       include Messaging::StreamName
       include FileTransferComponent::Messages::Commands
       include FileTransferComponent::Messages::Events
       include Log::Dependency
 
-      dependency :write, Messaging::Postgres::Write
-      dependency :clock, Clock::UTC
+      dependency :store, FileTransferComponent::Store
 
       def configure
-        Messaging::Postgres::Write.configure self
-        Clock::UTC.configure self
+        FileTransferComponent::Store.configure self
       end
 
       category :file

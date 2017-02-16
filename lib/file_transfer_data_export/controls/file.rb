@@ -1,8 +1,8 @@
-module FileTransferComponent
+module FileTransferDataExport
   module Controls
     module File
       def self.example
-        file = FileTransferComponent::File.build
+        file = FileTransferDataExport::File.build
         file.id = id
         file.name = name
         file
@@ -22,7 +22,7 @@ module FileTransferComponent
 
       module New
         def self.example
-          FileTransferComponent::File.build
+          FileTransferDataExport::File.build
         end
       end
 

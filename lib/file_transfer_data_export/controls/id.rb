@@ -1,4 +1,4 @@
-module FileTransferComponent
+module FileTransferDataExport
   module Controls
     module ID
       def self.example(increment: nil)

@@ -6,8 +6,8 @@ require_relative '../init.rb'
 
 require 'test_bench'; TestBench.activate
 
-require 'file_transfer_component/controls'
+require 'file_transfer_data_export/controls'
 
 require 'pp'
 
-include FileTransferComponent
+include FileTransferDataExport

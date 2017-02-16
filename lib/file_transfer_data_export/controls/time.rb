@@ -1,4 +1,4 @@
-module FileTransferComponent
+module FileTransferDataExport
   module Controls
     module Time
       def self.example(time=nil)
