@@ -8,16 +8,18 @@ module FileTransferDataExport
         end
 
         def call(entity, expected_version:)
-          puts "WRITING TO READ MODEL"
-          require 'pry'; binding.pry
+          data = entity.to_h
+          data.merge!(version: expected_version)
+
           file = files.where(file_id: entity.file_id).first
           if file
             if file[:version] < expected_version
-              files.update(entity.to_h)
+              files.update(data)
             end
             return
           end
-          files.insert(entity.to_h)
+
+          files.insert(data)
         end
 
         #TODO do something else
