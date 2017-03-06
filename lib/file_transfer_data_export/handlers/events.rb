@@ -18,10 +18,15 @@ module FileTransferDataExport
 
       handle CopiedToS3 do |copied_to_s3|
         file_id = copied_to_s3.file_id
+        position = copied_to_s3.metadata.position
+        # TODO wrap the whole thing is a transaction
+        # TODO have consumer position table
+        # global_position = copied_to_s3.metadata.global_position
 
-        file, stream_version = store.get(file_id, include: :version)
-        pp file.file_id
-        write.(file, expected_version: stream_version)
+        file = store.get(file_id)
+        #TODO position == version
+
+        write.(file, expected_version: position)
       end
 
     end
