@@ -4,6 +4,9 @@ module FileTransferDataExport
 
     attribute :file_id, String
     attribute :name, String
+    attribute :key, String
+    attribute :bucket, String
+    attribute :region, String
 
     def not_found?
       !not_found_time.nil?

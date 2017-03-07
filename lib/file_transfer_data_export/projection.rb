@@ -12,8 +12,12 @@ module FileTransferDataExport
         ])
     end
 
-    apply CopiedToS3 do |initiated|
-
+    apply CopiedToS3 do |copied_to_s3|
+         SetAttributes.(file, copied_to_s3, copy: [
+            :key,
+            :bucket,
+            :region
+        ])
     end
 
     apply NotFound do |not_found|

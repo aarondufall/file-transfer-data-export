@@ -27,6 +27,7 @@ module FileTransferDataExport
         #TODO position == version
 
         write.(file, expected_version: position)
+        logger.info { "File Model Updated" }
       end
 
     end
