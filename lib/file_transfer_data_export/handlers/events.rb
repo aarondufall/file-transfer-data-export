@@ -2,35 +2,33 @@ module FileTransferDataExport
   module Handlers
     class Events
       include Messaging::Handle
-      include Messaging::StreamName
-      include FileTransferComponent::Messages::Commands
-      include FileTransferComponent::Messages::Events
+      include Messaging::Postgres::StreamName
+      include FileTransfer::Client::Messages::Events
       include Log::Dependency
 
-      dependency :store, FileTransferComponent::Store
+      dependency :store, FileTransferDataExport::Store
+      dependency :write, FileTransferDataExport::ReadModel::Postgres::Write
 
       def configure
-        FileTransferComponent::Store.configure self
+        FileTransferDataExport::Store.configure self
+        FileTransferDataExport::ReadModel::Postgres::Write.configure self
       end
 
-      category :file
+      category :file_transfer
 
+      handle CopiedToS3 do |copied_to_s3|
+        file_id = copied_to_s3.file_id
+        position = copied_to_s3.metadata.position
+        # TODO wrap the whole thing is a transaction
+        # TODO have consumer position table
+        # global_position = copied_to_s3.metadata.global_position
 
-=begin
+        file = store.get(file_id)
+        #TODO position == version
 
-  Now draw the rest of the owl :)
-
-      _________
-     /_  ___   \
-    /@ \/@  \   \
-    \__/\___/   /
-     \_\/______/
-     /     /\\\\\
-    |     |\\\\\\
-     \      \\\\\\\
-       \______/\\\\\
-        _||_||_
-=end
+        write.(file, expected_version: position)
+        logger.info { "File Model Updated" }
+      end
 
     end
   end
