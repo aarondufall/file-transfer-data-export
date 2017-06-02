@@ -5,6 +5,6 @@ module FileTransferDataExport
     category 'file_transfer'
     entity File
     projection Projection
-    reader EventSource::Postgres::Read
+    reader MessageStore::Postgres::Read
   end
 end

@@ -2,7 +2,7 @@ module FileTransferDataExport
   module Handlers
     class Events
       include Messaging::Handle
-      include Messaging::Postgres::StreamName
+      include Messaging::StreamName
       include FileTransfer::Client::Messages::Events
       include Log::Dependency
 
