@@ -9,3 +9,5 @@ gem 'file_transfer-client', github: "aarondufall/file-transfer-component"
 gem 'sequel'
 gem 'test_bench'
 gem 'pry'
+gem 'rom-repository'
+gem 'rom-sql'
