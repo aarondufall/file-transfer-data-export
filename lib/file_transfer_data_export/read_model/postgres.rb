@@ -29,7 +29,7 @@ module FileTransferDataExport
 
         #TODO extract db connection
         def db
-          @db ||= Sequel.postgres('file_transfer', host:'localhost', user: 'event_source')
+          @db ||= Sequel.postgres('file_transfer', host:'localhost', user: 'message_store')
         end
       end
     end
