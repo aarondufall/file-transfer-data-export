@@ -16,7 +16,6 @@ module RomExample
     attribute :key, String
     attribute :bucket, String
     attribute :region, String
-    attribute :version, Integer
 
     module Transformer
       def self.raw_data(instance)
@@ -36,8 +35,6 @@ module RomExample
         :file_id,
         :name,
       ])
-
-      file.version = initiated.metadata.position
     end
 
     apply CopiedToS3 do |copied_to_s3|
@@ -46,8 +43,6 @@ module RomExample
         :bucket,
         :region
       ])
-
-      file.version = copied_to_s3.metadata.position
     end
   end
 
@@ -112,9 +107,11 @@ module RomExample
     def handle(message_data)
       file_id = message_data.data[:file_id]
 
-      file_transfer = store.fetch(file_id)
+      file_transfer, version = store.fetch(file_id, include: :version)
 
       raw_data = ::Transform::Write.raw_data(file_transfer)
+
+      raw_data[:version] = version
 
       repository.upsert(raw_data)
     end
