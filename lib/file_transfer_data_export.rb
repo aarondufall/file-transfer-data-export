@@ -17,5 +17,3 @@ require 'file_transfer_data_export/handlers/events'
 
 require 'file_transfer_data_export/consumers/event'
 require 'file_transfer_data_export/start'
-
-
