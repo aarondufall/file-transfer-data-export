@@ -68,7 +68,7 @@ module RomExample
       def self.container
         @container ||=
           begin
-            config = ::ROM::Configuration.new(:sql, 'postgres://localhost/file_transfer', username: 'message_store')
+            config = ::ROM::Configuration.new(:sql, 'postgres://localhost/view_store', username: 'view_store')
             config.register_command(Upsert)
 
             ::ROM.container(config)

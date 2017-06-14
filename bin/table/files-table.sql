@@ -3,10 +3,10 @@
 -- ----------------------------
 CREATE TABLE "public"."files" (
   "file_id" UUID NOT NULL,
-  "name" varchar(255) NOT NULL,
-  "key" varchar(255) NOT NULL,
-  "bucket" varchar(255) NOT NULL,
-  "region" varchar(255) NOT NULL,
+  "name" varchar(255),
+  "key" varchar(255),
+  "bucket" varchar(255),
+  "region" varchar(255),
   "version" int4 NOT NULL
 )
 WITH (OIDS=FALSE);
